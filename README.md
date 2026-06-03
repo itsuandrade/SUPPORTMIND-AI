@@ -55,7 +55,7 @@ O SupportMind AI busca reduzir esses problemas utilizando IA aplicada ao fluxo d
 Cliente
    │
    ▼
-Frontend (React/Next.js)
+Frontend (React)
    │
    ▼
 FastAPI Backend
@@ -70,11 +70,11 @@ PostgreSQL
    │
    ▼
 Vector Database
-(ChromaDB / Qdrant)
+(ChromaDB)
    │
    ▼
 LLM
-(OpenAI ou Ollama)
+(Ollama)
 ```
 
 ---
@@ -90,23 +90,20 @@ LLM
 
 ### Inteligência Artificial
 
-* OpenAI API
+
 * Ollama
 * Embeddings
 * ChromaDB
-* Qdrant
 * RAG
 
 ### Frontend
 
 * React
-* Next.js
 * Tailwind CSS
 
 ### DevOps
 
 * Docker
-* Docker Compose
 
 ### Testes
 
@@ -123,10 +120,7 @@ supportmind-ai/
 │   ├── app/
 │   │   ├── api/
 │   │   ├── core/
-│   │   ├── models/
-│   │   ├── schemas/
-│   │   ├── services/
-│   │   └── repositories/
+│   │   └── services
 │   │
 │   └── main.py
 │
@@ -137,7 +131,6 @@ supportmind-ai/
 ├── tests/
 │
 ├── Dockerfile
-├── docker-compose.yml
 ├── requirements.txt
 └── README.md
 ```
