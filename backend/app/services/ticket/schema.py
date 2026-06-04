@@ -1,15 +1,12 @@
 from pydantic import BaseModel
+from typing import Literal
+from datetime import datetime
 
 class TicketCreate(BaseModel):
     title: str
     description: str
 
 class TicketUpdate(BaseModel):
-    id: int
-    title: str | None = None
-    description: str | None = None
-    updated_at: str  # Não sei a melhor forma de guardar essa informação, chat...
-
-class TicketDelete(BaseModel):
-    id: int
-    updated_at: str  # Não sei a melhor forma de guardar essa informação, chat...
+    category: str
+    status: Literal['open', 'working on', 'closed']
+    priority: Literal['high', 'medium', 'low']  
