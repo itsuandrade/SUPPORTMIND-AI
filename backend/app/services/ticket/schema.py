@@ -7,6 +7,6 @@ class TicketCreate(BaseModel):
     description: str
 
 class TicketUpdate(BaseModel):
-    category: str
-    status: Literal['open', 'working on', 'closed']
-    priority: Literal['high', 'medium', 'low']  
+    category: str | None = None
+    status: Literal['open', 'working on', 'closed'] | None = None
+    priority: Literal['high', 'medium', 'low'] | None = None

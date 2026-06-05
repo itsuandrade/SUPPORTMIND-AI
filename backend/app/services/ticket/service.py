@@ -1,5 +1,5 @@
 from backend.app.services.ticket.repository import TicketRepository
-from backend.app.services.ticket.exceptions import *
+from backend.app.services.ticket.exceptions import TicketNotFound
 
 repository = TicketRepository()
 

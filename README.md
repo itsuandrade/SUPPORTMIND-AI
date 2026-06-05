@@ -156,9 +156,9 @@ supportmind-ai/
 * [x] Estrutura inicial FastAPI
 * [x] Dockerização da aplicação
 * [x] Health Check
-* [ ] CRUD de tickets
+* [x] CRUD de tickets
 * [ ] PostgreSQL
-* [ ] SQLAlchemy
+* [x] SQLAlchemy
 
 ### Fase 2 — IA
 

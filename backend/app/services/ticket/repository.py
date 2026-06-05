@@ -1,9 +1,8 @@
 from sqlalchemy.orm import Session
-from fastapi import HTTPException
+from datetime import datetime, UTC
 
 from backend.app.services.ticket.model import Ticket
 from backend.app.services.ticket.schema import TicketUpdate
-from datetime import datetime, UTC
 
 class TicketRepository():
 
