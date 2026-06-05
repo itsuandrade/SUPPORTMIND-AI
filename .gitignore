@@ -1,6 +1,7 @@
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
+
 .env
 *.db
-*.logs
+*.log
