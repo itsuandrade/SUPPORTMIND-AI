@@ -1,9 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from dotenv import load_dotenv
+from os import getenv
 
-DATABASE = 'sqlite:///supportmind.db'
+load_dotenv('.env')
 
-engine = create_engine(DATABASE, connect_args={'check_same_thread': False})
+DATABASE_URL = getenv("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
 class Base(DeclarativeBase):

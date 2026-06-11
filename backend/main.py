@@ -1,11 +1,7 @@
 from fastapi import FastAPI
-
-from backend.app.core.database import engine, Base
-
 from backend.app.services.ticket.router import ticket_router
 
 app = FastAPI()
-Base.metadata.create_all(bind=engine) 
 
 ### Routes
 app.include_router(ticket_router)

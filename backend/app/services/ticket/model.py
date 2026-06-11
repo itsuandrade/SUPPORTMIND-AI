@@ -6,12 +6,14 @@ class Ticket(Base):
 
     id = Column(Integer, primary_key=True)
 
-    title = Column(String)
-    description = Column(String)
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=False)
 
-    category = Column(String)
-    status = Column(String)
-    priority = Column(String)
+    category = Column(String, nullable=False)
+    status = Column(String, nullable=False)
+    priority = Column(String, nullable=False)
 
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=True)
+
+    test_column = Column(String, nullable=True)

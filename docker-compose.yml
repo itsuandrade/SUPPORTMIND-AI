@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: supportmind_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=psqlpassword
+      - POSTGRES_USER=psqluser
+      - POSTGRES_DB=supportmind
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  postgres_data: 

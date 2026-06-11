@@ -130,7 +130,13 @@ supportmind-ai/
 │
 ├── tests/
 │
+├── alembic/
+│   ├── versions/
+│   └── env.py
+├── alembic.ini
+│
 ├── Dockerfile
+├── docker-compose.yml
 ├── requirements.txt
 └── README.md
 ```
@@ -155,10 +161,9 @@ supportmind-ai/
 
 * [x] Estrutura inicial FastAPI
 * [x] Dockerização da aplicação
-* [x] Health Check
 * [x] CRUD de tickets
-* [ ] PostgreSQL
-* [x] SQLAlchemy
+* [x] PostgreSQL
+* [x] SQLAlchemy + Alembic
 
 ### Fase 2 — IA
 
