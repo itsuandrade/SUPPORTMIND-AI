@@ -15,5 +15,3 @@ class Ticket(Base):
 
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=True)
-
-    test_column = Column(String, nullable=True)
