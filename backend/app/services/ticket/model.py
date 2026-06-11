@@ -12,6 +12,8 @@ class Ticket(Base):
     category = Column(String, nullable=False)
     status = Column(String, nullable=False)
     priority = Column(String, nullable=False)
+    # assigned_to = Column(String, nullable=True)
 
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=True)
+    # closed_at = Column(DateTime, nullable=True)

@@ -20,6 +20,7 @@ from backend.app.core.database import Base
 
 # ***MODEL IMPORTS*** #
 from backend.app.services.ticket.model import Ticket
+from backend.app.services.user.model import User
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
