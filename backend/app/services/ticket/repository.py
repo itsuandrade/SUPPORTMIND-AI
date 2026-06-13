@@ -6,33 +6,29 @@ from backend.app.services.ticket.schema import TicketUpdate
 
 class TicketRepository():
 
-    def create(self,
-               db: Session,
-               title: str,
-               description: str,
-               ) -> Ticket:
+    def __init__(self, db: Session):
+        self.db = db
+
+    def create(self, new_ticket) -> Ticket:
 
         ticket = Ticket(
-            title = title,
-            description = description,
-            category='general',
-            status='open',
-            priority='low',
-            created_at=datetime.now(UTC)
+            title = new_ticket.title,
+            description = new_ticket.description,
+            category = 'general',
+            status = 'open',
+            priority = 'low',
+            created_at = datetime.now(UTC)
             )
 
-        db.add(ticket)
-        db.commit()
-        db.refresh(ticket)
+        self.db.add(ticket)
+        self.db.commit()
+        self.db.refresh(ticket)
 
         return ticket
     
-    def update(self,
-               db: Session,
-               ticket_id: int,
-               update: TicketUpdate) -> Ticket:
+    def update(self, ticket_id: int, update) -> Ticket:
 
-        ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
+        ticket = self.db.query(Ticket).filter(Ticket.id == ticket_id).first()
 
         if update.status:
             ticket.status = update.status
@@ -45,25 +41,25 @@ class TicketRepository():
         
         ticket.updated_at = datetime.now(UTC)
 
-        db.commit()
-        db.refresh(ticket)
+        self.db.commit()
+        self.db.refresh(ticket)
 
         return ticket
     
-    def delete(self, db: Session, ticket_id: int) -> bool:
+    def delete(self, ticket_id: int) -> bool:
 
-        ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
+        ticket = self.db.query(Ticket).filter(Ticket.id == ticket_id).first()
 
-        db.delete(ticket)
-        db.commit()
+        self.db.delete(ticket)
+        self.db.commit()
 
         return True
 
-    def list_all(self, db: Session):
-        tickets = db.query(Ticket).all()
+    def list_all(self):
+        tickets = self.db.query(Ticket).all()
         return tickets
 
-    def get_by_id(self, db: Session, ticket_id: int):
-        ticket = db.query(Ticket).filter(Ticket.id == ticket_id).first()
+    def get_by_id(self, ticket_id: int):
+        ticket = self.db.query(Ticket).filter(Ticket.id == ticket_id).first()
         return ticket
 

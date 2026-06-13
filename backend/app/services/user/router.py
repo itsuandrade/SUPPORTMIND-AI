@@ -5,7 +5,6 @@ from backend.app.core.database import get_db
 from backend.app.services.user.schema import *
 from backend.app.services.user.service import UserService
 
-
 user_router = APIRouter(
     prefix='/user',
     tags=['Users']
