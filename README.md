@@ -1,6 +1,6 @@
 # SupportMind AI
 
-Sistema Inteligente de Atendimento e Suporte Técnico com Inteligência Artificial.
+Sistema Inteligente de Atendimento e Suporte Técnico com Inteligência Artificial. Criado com objetivo de estudo e prática de programação Full Stack com integração de IA.
 
 ## 📖 Visão Geral
 
@@ -164,6 +164,7 @@ supportmind-ai/
 * [x] CRUD de tickets
 * [x] PostgreSQL
 * [x] SQLAlchemy + Alembic
+* [x] CRUD e Autenticação de Usuário
 
 ### Fase 2 — IA
 

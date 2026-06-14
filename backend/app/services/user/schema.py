@@ -21,3 +21,7 @@ class UserResponse(BaseModel):
     role: str
     created_at: datetime
     updated_at: datetime | None = None
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str

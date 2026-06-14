@@ -43,8 +43,8 @@ class UserRepository:
         if update.email:
             user.email = update.email
 
-        if update.password:
-            user.hashed_pw = update.password
+        if update.hashed_pw:
+            user.hashed_pw = update.hashed_pw
 
         user.updated_at = datetime.now(UTC)
 
@@ -68,3 +68,12 @@ class UserRepository:
     def get_by_id(self, id) -> User:
         user = self.db.query(User).filter(User.id == id).first()
         return user
+    
+    def get_by_attempt(self, attempt) -> User:        
+    
+        if attempt.username:
+            user = self.db.query(User).filter(User.username == attempt.username).first()
+
+        if user:
+            return user
+        

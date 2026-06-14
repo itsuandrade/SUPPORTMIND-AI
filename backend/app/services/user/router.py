@@ -1,17 +1,38 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from backend.app.core.database import get_db
+from backend.app.core.dependencies import get_current_user
 from backend.app.services.user.schema import *
+from backend.app.services.user.model import User
 from backend.app.services.user.service import UserService
 
 user_router = APIRouter(
-    prefix='/user',
+    prefix='/users',
     tags=['Users']
 )
 
 def get_user_service(db: Session = Depends(get_db)) -> UserService:
     return UserService(db)
+
+#ATTEMPT LOGIN
+@user_router.post('/login')
+def attempt_login(form_data: OAuth2PasswordRequestForm = Depends(), user_service: UserService = Depends(get_user_service)):
+    
+    token = user_service.attempt_login(form_data)
+    
+    return TokenResponse(
+        access_token = token,
+        token_type = 'bearer'
+    )
+
+@user_router.get('/me')
+def get_me(user: User = Depends(get_current_user)):
+
+    return {'message': f'User {user.id} authenticated!'}
+
+#USER CRUD
 
 @user_router.get('/', response_model=list[UserResponse])
 def get_users(user_service: UserService = Depends(get_user_service)):
@@ -42,4 +63,3 @@ def delete_user(user_id: int, user_service: UserService = Depends(get_user_servi
     else:
         raise HTTPException(404, detail='Usuário não encontrado.')
 
-# @user_router.post('/me')
