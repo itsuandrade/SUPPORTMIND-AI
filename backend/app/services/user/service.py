@@ -26,7 +26,7 @@ class UserService:
         
         if update.password:
             hashed_pw = hash_password(update.password).decode('utf-8')
-            update['hashed_pw'] = hashed_pw
+            update.hashed_pw = hashed_pw
 
         user = self.repository.update(id, update)
 

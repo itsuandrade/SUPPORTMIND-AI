@@ -20,3 +20,4 @@ class TicketResponse(BaseModel):
     priority: Literal['high', 'medium', 'low']
     created_at: datetime
     updated_at: datetime | None = None
+    user_id: int

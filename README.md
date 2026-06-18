@@ -160,11 +160,11 @@ supportmind-ai/
 ### Fase 1 — MVP
 
 * [x] Estrutura inicial FastAPI
-* [x] Dockerização da aplicação
-* [x] CRUD de tickets
 * [x] PostgreSQL
 * [x] SQLAlchemy + Alembic
-* [x] CRUD e Autenticação de Usuário
+* [x] Dockerização da aplicação
+* [x] CRUD e autenticação de usuário
+* [x] CRUD de tickets e associação ao usuário
 
 ### Fase 2 — IA
 

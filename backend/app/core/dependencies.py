@@ -28,8 +28,6 @@ def get_current_user(token: str = Depends(oauth2_scheme),
             algorithms=[ALGORITHM]
         )
 
-        print(payload)
-
         user_id = int(payload['sub'])
         
         user = (
@@ -41,6 +39,7 @@ def get_current_user(token: str = Depends(oauth2_scheme),
         if user is None:
             raise HTTPException(404, 'User not found.')
         
+        print("Autenticated...")
         return user
 
     except (jwt.ExpiredSignatureError, jwt.PyJWTError):
