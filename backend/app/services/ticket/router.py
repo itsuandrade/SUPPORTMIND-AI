@@ -27,7 +27,7 @@ def create_ticket(new_ticket: TicketCreate,
                   user: User = Depends(get_current_user),
                   ticket_service = Depends(get_ticket_service)) -> TicketResponse:
     
-    ticket = ticket_service.create_ticket(new_ticket, user_id = user.id)
+    ticket = ticket_service.create_ticket(new_ticket, user)
     return ticket
 
 @ticket_router.get('/', response_model=list[TicketResponse])

@@ -163,8 +163,9 @@ supportmind-ai/
 * [x] PostgreSQL
 * [x] SQLAlchemy + Alembic
 * [x] Dockerização da aplicação
-* [x] CRUD e autenticação de usuário
+* [x] CRUD de usuários
 * [x] CRUD de tickets e associação ao usuário
+* [x] Autenticação e autorização
 
 ### Fase 2 — IA
 

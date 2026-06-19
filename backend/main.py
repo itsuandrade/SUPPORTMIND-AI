@@ -14,6 +14,10 @@ app.include_router(user_router)
 app.add_exception_handler(handlers.TicketNotFound, handlers.ticket_not_found_handler)
 app.add_exception_handler(handlers.UnauthorizedTicketAccess, handlers.unauthorized_ticket_handler)
 
+app.add_exception_handler(handlers.UserNotFound, handlers.user_not_found_handler)
+app.add_exception_handler(handlers.WrongCredentials, handlers.wrong_credentials_handler)
+app.add_exception_handler(handlers.UnauthorizedUserAccess, handlers.unauth_user_acess)
+
 ### Health check
 @app.get('/')
 def health_check():

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
@@ -27,39 +27,47 @@ def attempt_login(form_data: OAuth2PasswordRequestForm = Depends(), user_service
         token_type = 'bearer'
     )
 
-@user_router.get('/me')
-def get_me(user: User = Depends(get_current_user)):
-
-    return {'message': f'User {user.id} authenticated!'}
-
-#USER CRUD
-
-@user_router.get('/', response_model=list[UserResponse])
-def get_users(user_service: UserService = Depends(get_user_service)):
-    users = user_service.list_all()
-    return users
-
-@user_router.get('/{user_id}', response_model=UserResponse)
-def get_user(user_id: int, user_service: UserService = Depends(get_user_service)):
-    user = user_service.get_by_id(user_id)
+@user_router.get('/me', response_model=UserResponse)
+def get_me(user: User = Depends(get_current_user)) -> User:
     return user
 
+#USER CRUD:
+
 @user_router.post('/', response_model=UserResponse)
-def create_user(new_user: UserCreate, user_service: UserService = Depends(get_user_service)):
+def create_user(new_user: UserCreate,
+                user_service: UserService = Depends(get_user_service)):
+    
     user = user_service.create_user(new_user)
     return user
 
-@user_router.put('/{user_id}', response_model=UserResponse)
-def update_user(user_id: int, update_user: UserUpdate, user_service: UserService = Depends(get_user_service)):
-    user = user_service.update_user(id = user_id, update = update_user)
-    return user
+@user_router.get('/', response_model=list[UserResponse])
+def get_users(user: User = Depends(get_current_user),
+              user_service: UserService = Depends(get_user_service)) -> list[User]:
+    
+    users = user_service.list_all(user)
+    return users
 
-@user_router.delete('/{user_id}')
-def delete_user(user_id: int, user_service: UserService = Depends(get_user_service)):
-    deleted = user_service.delete_user(user_id)
+@user_router.get('/{user_id}', response_model=UserResponse)
+def get_user(user_id: int, 
+             user: User = Depends(get_current_user),
+             user_service: UserService = Depends(get_user_service)) -> User:
+    
+    search_user = user_service.get_by_id(user, user_id)
+    return search_user
 
-    if deleted:
-        return {'message': f'User {user_id} deletado com sucesso.'}
-    else:
-        raise HTTPException(404, detail='Usuário não encontrado.')
+@user_router.put('/', response_model=UserResponse)
+def update_user(update_user: UserUpdate,
+                user: User = Depends(get_current_user), 
+                user_service: UserService = Depends(get_user_service)) -> User:
+    
+    updated_user = user_service.update_user(user, update_user)
+    return updated_user
+
+@user_router.delete('/')
+def delete_user(user: User = Depends(get_current_user),
+                user_service: UserService = Depends(get_user_service)):
+    
+    user_service.delete_user(user)
+    return {'message': f'User deletado com sucesso.'}
+
 

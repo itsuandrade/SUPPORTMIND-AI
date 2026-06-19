@@ -9,7 +9,7 @@ class TicketRepository():
     def __init__(self, db: Session):
         self.db = db
 
-    def create(self, new_ticket, user_id) -> Ticket:
+    def create(self, new_ticket, user) -> Ticket:
 
         ticket = Ticket(
             title = new_ticket.title,
@@ -18,7 +18,7 @@ class TicketRepository():
             status = 'open',
             priority = 'low',
             created_at = datetime.now(UTC),
-            user_id = user_id
+            user_id = user.id
             )
 
         self.db.add(ticket)

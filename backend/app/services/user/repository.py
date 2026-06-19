@@ -2,13 +2,16 @@ from sqlalchemy.orm import Session
 from datetime import datetime, UTC
 
 from backend.app.services.user.model import User
-from backend.app.services.user.schema import UserUpdate
 
 class UserRepository:
 
     def __init__(self, db: Session):
         self.db = db
 
+    def _get_by_id(self, id) -> User:
+        user = self.db.query(User).filter(User.id == id).first()
+        return user
+    
     def create(self,
                username: str,
                name: str,
@@ -30,9 +33,15 @@ class UserRepository:
 
         return user
 
-    def update(self, id: int, update) -> User:
+    def list_all(self) -> list[User]:
+        users = self.db.query(User).all()
+        return users
+
+    def get_by_attempt(self, attempt) -> User | None:        
+        user = self.db.query(User).filter(User.username == attempt.username).first()
+        return user
         
-        user = self.db.query(User).filter(User.id == id).first()
+    def update(self, user, update) -> User:
 
         if update.username:
             user.username = update.username
@@ -43,8 +52,8 @@ class UserRepository:
         if update.email:
             user.email = update.email
 
-        if update.hashed_pw:
-            user.hashed_pw = update.hashed_pw
+        if update.password:
+            user.hashed_pw = update.password
 
         user.updated_at = datetime.now(UTC)
 
@@ -53,27 +62,7 @@ class UserRepository:
 
         return user
 
-    def delete(self, id) -> bool:
-
-        user = self.db.query(User).filter(User.id == id).first()
+    def delete(self, user) -> bool:
         self.db.delete(user)
         self.db.commit()
-        
         return True
-
-    def list_all(self) -> list[User]:
-        users = self.db.query(User).all()
-        return users
-
-    def get_by_id(self, id) -> User:
-        user = self.db.query(User).filter(User.id == id).first()
-        return user
-    
-    def get_by_attempt(self, attempt) -> User:        
-    
-        if attempt.username:
-            user = self.db.query(User).filter(User.username == attempt.username).first()
-
-        if user:
-            return user
-        
